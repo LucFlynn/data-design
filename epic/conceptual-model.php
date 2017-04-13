@@ -13,11 +13,16 @@
 			<li>profileEmail</li>
 			<li>profileHash</li>
 			<li>profileSalt</li>
-			</ul>
+		</ul>
+
+		<ul>Product
+			<li>productId</li>
+			<li> product</li>
+		</ul>
 
 		<ul>Favorite
-			<li>faveItemId (Primary key)</li>
-			<li>faveProfileItemId(foreign key</li>
+			<li>faveProductId (Primary key)</li>
+			<li>faveProfileProductId(foreign key)</li>
 			<li>faveDate</li>
 		</ul>
 

@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>Use Case</title>
-		<h1> A very Bad Etsy Site</h1>
+
 	</head>
 	<body>
-
+		<h1> A very Bad Etsy Site</h1>
 		<h2> Use Case </h2>
-	<p>Kim has read on the internet, while using her mac and iphone, about a very bad etsy site. She always enjoyed etsy for her product needs but has an 'internet' sense of humor. The ability to favorite things but not actually buy them tickles her. She typically logs on when she's tired of instagram and twitter, doesn't have any money to actually spend or is looking for inspiration on what to buy. She gets a jolt from window shopping and imagining how products could be used in her life. And sometimes she finds things she didn't even know she needed. In this case she typically favorites the item to show off to herself or to save for purchasing elsewhere later.</p>
+			<p>Kim spends time on reddit like everyone else who matters, and has read while using her iphone to distract herself from the awkardness of talking to her coworkers, about "A very bad etsy site". She always enjoyed Etsy for her product needs but has an 'internet' sense of humor. The ability to favorite things but not actually buy them tickles her. She typically logs on when she's tired of instagram and twitter, doesn't have any money to actually spend or is looking for inspiration on what to buy. She gets a jolt from window shopping and visualizing how different products could be used in her life. And sometimes she finds things she didn't even know she needed. In this case she typically favorites the item to show off to herself or to save for purchasing elsewhere later.</p>
 
 		<h2> Interaction Flow</h2>
 		<ol>
