@@ -18,12 +18,15 @@
 		<ul>Product
 			<li>productId</li>
 			<li> product</li>
+			<li> productPrice</li>
 		</ul>
 
 		<ul>Favorite
 			<li>faveProductId (Primary key)</li>
-			<li>faveProfileProductId(foreign key)</li>
-			<li>faveDate</li>
+			<li>faveProductProfileId(foreign key)</li>
+
+
+
 		</ul>
 
 		<ul> Relations
