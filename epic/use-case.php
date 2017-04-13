@@ -4,6 +4,7 @@
 		<meta charset="utf-8"/>
 		<title>Use Case</title>
 	</head>
-	<body> </body>
-	<p>As a very bad etsy user I want to see products I like, and favorite them so I can come back later and drool over my great taste.</p>
+	<body>
+	<p>Kim has heard on the internet about a very bad esty site. She always enjoyed etsy for her product needs but has an 'internet' sense of humor. She the ability to favorite things but not actually buy them tickles her. She typically logs on when she's tired of instagram and twitter, doesn't have any money to actually spend or is looking for inspiration on what to spend. She gets a jolt from window shopping and imaging how products could be used in her life. And sometimes she finds things she didn't even know she needed. In this case she typically favorites the item to show off to herself or to save for purchasing elsewhere later.</p>
+	</body>
 </html>
