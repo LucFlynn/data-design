@@ -7,7 +7,7 @@
 	<body>
 		<h1>Conceptual model</h1>
 		<ul>Profile
-			<li>profileId (Primary Key)</li>
+			<li>profileId(Primary Key)</li>
 			<li>profileVerificationToke</li>
 			<li>profileHandle</li>
 			<li>profileEmail</li>
@@ -32,6 +32,8 @@
 		<ul> Relations
 			<li> One <strong> profile </strong> favorites <strong>products </strong> (m to n) </li>
 		</ul>
+
+		<img src="images/erd.svg" alt="ERD" />
 
 	</body>
 </html>

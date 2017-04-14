@@ -10,7 +10,7 @@
 
 	<h1> Persona </h1>
 
-		<img src="images/kim.jpeg" alt="Lancer" />
+		<img src="images/kim.jpeg" alt="" />
 		<p> <strong> Name: </strong> Kim <br> <strong> Age </strong> 33 </p>
 
 		<p> <strong>Profession</strong> <br> Mid-Level engineer at an electronics company. Typically working in and dealing with monitoring systems of machinery and more often than she would like trouble shooting these systems to keep everything running. She has worked here for about 2 years and thinks of it more as a stepping stone to gain some skills in order to move on to a bigger start up where she can have more freedom to design embedded systems.</p>
