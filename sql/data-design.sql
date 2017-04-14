@@ -1,4 +1,4 @@
-DROP TABLE IF EXIST fave;
+DROP TABLE IF EXIST favorite;
 DROP TABLE IF EXIST product;
 DROP TABLE IF EXIST profile;
 
@@ -11,7 +11,6 @@ CREATE TABLE  profile (
 	profileHash  CHAR(128) NOT NULL,
 	profileSalt CHAR(64) NOT NULL,
 	UNIQUE(profileEmail),
-	UNION (profileAtHandle),
-
+	UNIQUE(profileHandle),
 	PRIMARY KEY (profileId)
 );
