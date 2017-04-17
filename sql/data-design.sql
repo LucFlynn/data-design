@@ -16,9 +16,9 @@ CREATE TABLE profile (
 
 CREATE TABLE product (
 	productId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	productPrice VARCHAR (140) NOT NULL,
-	INDEX(productPrice),
-	FOREIGN KEY(productPrice) REFERENCES profile(profileId),
+	productProfileId INT UNSIGNED NOT NULL,
+	INDEX(productProfileId),
+	FOREIGN KEY(productProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY(productId)
 );
 
