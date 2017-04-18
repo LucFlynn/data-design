@@ -5,8 +5,8 @@ DROP TABLE IF EXISTS profile;
 CREATE TABLE profile (
 	profileId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	profileActivationToke CHAR(32),
-	profileHandle VARCHAR (32),
-	ProfileEmail VARCHAR (128) UNIQUE NOT NULL,
+	profileHandle VARCHAR (32) NOT NULL,
+	profileEmail VARCHAR (128) NOT NULL,
 	profileHash CHAR(128) NOT NULL,
 	profileSalt CHAR(64) NOT NULL,
 	UNIQUE(profileEmail),
@@ -17,6 +17,7 @@ CREATE TABLE profile (
 CREATE TABLE product (
 	productId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	productProfileId INT UNSIGNED NOT NULL,
+	productPrice VARCHAR(32),
 	INDEX(productProfileId),
 	FOREIGN KEY(productProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY(productId)
