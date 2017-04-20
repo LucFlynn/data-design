@@ -12,19 +12,19 @@
 
 		<h2> Interaction Flow</h2>
 		<ol>
-			<li> I login through chrome</li>
+			<li> Kim will login through chrome</li>
 			<li> A.V.B.E. redirects to home page whit previously favorited products</li>
-			<li> I Hit "browse products"</li>
+			<li> Kim will Hit "browse products"</li>
 			<li> A.V.B.E. Takes me to "channels" page with more specified product genres along with 'random' </li>
-			<li> I click random</li>
+			<li> Kim will click random</li>
 			<li> A.V.B.E. redirects to a random item with a 'favorite' or 'skip' button</li>
-			<li> I push favorite</li>
+			<li> Kim will push favorite</li>
 			<li> A.V.B.E. takes favoirite and stores it in favorite entity, presents another product</li>
-			<li> I press skip</li>
+			<li> Kim will press skip</li>
 			<li> A.V.B.E. presents another product</li>
-			<li> I click home</li>
+			<li> Kim will click home</li>
 			<li> A.V.B.E. redirects to home</li>
-			<li> I click log off</li>
+			<li> Kim will click log off</li>
 			<li> A.V.B.E. redirects to sign in page. </li>
 		</ol>
 

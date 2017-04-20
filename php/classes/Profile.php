@@ -1,5 +1,5 @@
 <?php
-namespace Edu\Cnm\DataDesign;
+namespace home\lflynn7\DataDesign\php\classes;
 
 /** Profile Class
  * This class is a collection of profile data collected by users from the Very Bad  Site
