@@ -1,5 +1,6 @@
 <?php
 namespace home\lflynn7\DataDesign\php\classes;
+require_once("autoload.php");
 
 /** Profile Class
  * This class is a collection of profile data collected by users from the Very Bad  Site
@@ -10,6 +11,7 @@ namespace home\lflynn7\DataDesign\php\classes;
  **/
 
 class Profile{
+	use ValidateDate;
 
 	/**
 	 * id for this Profile; this is the primary key

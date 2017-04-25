@@ -33,8 +33,6 @@ spl_autoload_register(function($class) {
 	// with .php
 	$file = $baseDir . str_replace("\\", "/", $className) . ".php";
 
-	/home/foo/bar...
-	c:\users\foo\bar
 
 
 	// if the file exists, require it
