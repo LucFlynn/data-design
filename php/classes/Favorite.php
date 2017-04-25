@@ -107,50 +107,49 @@ public function __construct(?int $newFaveProudctId, int $newFaveProductProfileId
 	}
 
 	/**
-	 * inserts this Tweet into mySQL
+	 * inserts this favorite into mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function insert(\PDO $pdo) : void {
-		// enforce the tweetId is null (i.e., don't insert a tweet that already exists)
+		// enforce the faveProductId is null (i.e., don't insert a favorite that already exists)
 		if($this->faveProductId !== null) {
-			throw(new \PDOException("not a new tweet"));
+			throw(new \PDOException("not a new favorite"));
 		}
 		// create query template
-		$query = "INSERT INTO tweet(tweetProfileId, tweetContent, tweetDate) VALUES(:tweetProfileId, :tweetContent, :tweetDate)";
+		$query = "INSERT INTO favorite(faveProductId, faveProductProfileId) VALUES(:faveProfileId, :faveProductProfileId)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$formattedDate = $this->tweetDate->format("Y-m-d H:i:s");
-		$parameters = ["tweetProfileId" => $this->tweetProfileId, "tweetContent" => $this->tweetContent, "tweetDate" => $formattedDate];
+		$parameters = ["faveProductId" => $this->faveProductId, "faveProductProfileId" => $this->faveProductProfileId];
 		$statement->execute($parameters);
-		// update the null tweetId with what mySQL just gave us
-		$this->tweetId = intval($pdo->lastInsertId());
+		// update the null faveProductId with what mySQL just gave us
+		$this->faveProductId = intval($pdo->lastInsertId());
 	}
 
 	/**
-	 * deletes this Tweet from mySQL
+	 * deletes this Fave from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function delete(\PDO $pdo) : void {
-		// enforce the tweetId is not null (i.e., don't delete a tweet that hasn't been inserted)
-		if($this->tweetId === null) {
-			throw(new \PDOException("unable to delete a tweet that does not exist"));
+		// enforce the faveProductId is not null (i.e., don't delete a fave that hasn't been inserted)
+		if($this->faveProductId === null) {
+			throw(new \PDOException("unable to delete a fave that does not exist"));
 		}
 		// create query template
-		$query = "DELETE FROM tweet WHERE tweetId = :tweetId";
+		$query = "DELETE FROM fave WHERE faveProductId = :faveProductId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holder in the template
-		$parameters = ["tweetId" => $this->tweetId];
+		$parameters = ["faveProductId" => $this->faveProductId];
 		$statement->execute($parameters);
 	}
 
 	/**
-	 * updates this Tweet in mySQL
+	 * updates this fave in mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
@@ -162,47 +161,46 @@ public function __construct(?int $newFaveProudctId, int $newFaveProductProfileId
 			throw(new \PDOException("unable to update a tweet that does not exist"));
 		}
 		// create query template
-		$query = "UPDATE tweet SET tweetProfileId = :tweetProfileId, tweetContent = :tweetContent, tweetDate = :tweetDate WHERE tweetId = :tweetId";
+		$query = "DELETE FROM fave WHERE faveProductId = :faveProductId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$formattedDate = $this->tweetDate->format("Y-m-d H:i:s");
-		$parameters = ["tweetProfileId" => $this->tweetProfileId, "tweetContent" => $this->tweetContent, "tweetDate" => $formattedDate, "tweetId" => $this->tweetId];
+		$parameters = ["faveProductProfileId" => $this->faveProductProfileId, "faveProductId" => $this->faveProductId];
 		$statement->execute($parameters);
 	}
 
 	/**
-	 * gets a Tweet by tweetId
+	 * gets a fave by faveProductId
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param int $tweetId tweet id to search for
-	 * @return Tweet|null Tweet found or null if not found
+	 * @return Favorite|null fave found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getTweetByTweetId(\PDO $pdo, int $tweetId) : ?Tweet {
+	public static function getfaveByfaveId(\PDO $pdo, int $faveProductId) : ?Favorite {
 		// sanitize the tweetId before searching
-		if($tweetId <= 0) {
-			throw(new \PDOException("tweet id is not positive"));
+		if($faveProductId <= 0) {
+			throw(new \PDOException("fave id is not positive"));
 		}
 		// create query template
-		$query = "SELECT tweetId, tweetProfileId, tweetContent, tweetDate FROM tweet WHERE tweetId = :tweetId";
+		$query = "SELECT faveProductId, faveProductProfileId FROM favorite WHERE faveProductId = :faveProductId";
 		$statement = $pdo->prepare($query);
 		// bind the tweet id to the place holder in the template
-		$parameters = ["tweetId" => $tweetId];
+		$parameters = ["faveProductId" => $faveProductId];
 		$statement->execute($parameters);
-		// grab the tweet from mySQL
+		// grab the fave from mySQL
 		try {
-			$tweet = null;
+			$favorite = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$tweet = new Tweet($row["tweetId"], $row["tweetProfileId"], $row["tweetContent"], $row["tweetDate"]);
+				$Favorite = new Favorite($row["faveProductId"], $row["faveProductProfileId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($tweet);
+		return($favorite);
 	}
 
 }
