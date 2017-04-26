@@ -32,7 +32,7 @@ private $faveProductProfileId;
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 
-public function __construct(?int $newFaveProudctId, int $newFaveProductProfileId) {
+public function __construct(?int $newFaveProductId, int $newFaveProductProfileId) {
 	try {
 		$this->setFaveProductId($newFaveProductProfileId);
 		$this->setFaveProductProfileId($newFaveProductProfileId);
@@ -157,7 +157,7 @@ public function __construct(?int $newFaveProudctId, int $newFaveProductProfileId
 	 **/
 	public function update(\PDO $pdo) : void {
 		// enforce the tweetId is not null (i.e., don't update a tweet that hasn't been inserted)
-		if($this->tweetId === null) {
+		if($this->faveProductId === null) {
 			throw(new \PDOException("unable to update a tweet that does not exist"));
 		}
 		// create query template
@@ -177,7 +177,7 @@ public function __construct(?int $newFaveProudctId, int $newFaveProductProfileId
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getfaveByfaveId(\PDO $pdo, int $faveProductId) : ?Favorite {
+	public static function getfavesByfaveId(\PDO $pdo, int $faveProductId) : ?Favorite {
 		// sanitize the tweetId before searching
 		if($faveProductId <= 0) {
 			throw(new \PDOException("fave id is not positive"));
@@ -194,7 +194,7 @@ public function __construct(?int $newFaveProudctId, int $newFaveProductProfileId
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$Favorite = new Favorite($row["faveProductId"], $row["faveProductProfileId"]);
+				$favorite = new Favorite($row["faveProductId"], $row["faveProductProfileId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
