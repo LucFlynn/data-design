@@ -54,18 +54,18 @@ try {
 
 		//get a specific tweet or all tweets and update reply
 			if(empty($id) === false) {
-			$favorite = Favorite::getfavesByfaveId($pdo, $id);
+			$favorite = Favorite::getfavoritesByfavoriteId($pdo, $id);
 			if($favorite !== null) {
 				$reply->data = $favorite;
 				}
 		} else if(empty($faveProdctid) === false) {
-					$favore = Favorite::getfavesByfaveId($pdo, $faveProductid)->toArray();
+					$favore = Favorite::getfavoritesByfavoriteId($pdo, $faveProductid)->toArray();
 					if($favorite !== null) {
 						$reply->data = $favorite;
 				}
 			}
 		} else if(empty($faveProdctProfileid) === false) {
-		$favorite = Favorite::getfavesByfaveId($pdo, $faveProductProfileId)->toArray();
+		$favorite = Favorite::getfavoritesByfavoriteId($pdo, $faveProductProfileId)->toArray();
 		if($favorite !== null) {
 			$reply->data = $favorite;
 		}

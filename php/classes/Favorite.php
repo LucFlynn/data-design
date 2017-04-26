@@ -12,11 +12,11 @@ class Favorite {
 
 	/** id for the product */
 
-private $faveProductId;
+private $favoriteProductId;
 
 	/** id for the Profile that has the product */
 
-private $faveProductProfileId;
+private $favoriteProductProfileId;
 
 	/**
 	 * constructor for this Tweet
@@ -32,10 +32,10 @@ private $faveProductProfileId;
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 
-public function __construct(?int $newFaveProductId, int $newFaveProductProfileId) {
+public function __construct( int $newFaveProductId, int $newFaveProductProfileId) {
 	try {
-		$this->setFaveProductId($newFaveProductProfileId);
-		$this->setFaveProductProfileId($newFaveProductProfileId);
+		$this->setFavoriteProductId($newFaveProductProfileId);
+		$this->setFavoriteProductProfileId($newFaveProductProfileId);
 	}
 		//determine excpetion type thrown
 	catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -52,8 +52,8 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 **/
 
 
-	public function getFaveProductId(): ?int {
-		return ($this->FaveProductId());
+	public function getFavoriteProductId(): ?int {
+		return ($this->favoriteProductId());
 	}
 
 	/**
@@ -64,24 +64,24 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 * @throws \TypeError if $newProfileId is not an integer
 	 */
 
-	public function setFaveProductId(?int $newFaveProductId): void {
-		if($newFaveProductId === null) {
-			$this->setFaveProductId = null;
+	public function setFavoriteProductId( int $newFavoriteProductId): void {
+		if($newFavoriteProductId === null) {
+			$this->setFavoriteProductId() = null;
 			return;
 		}
 
-		if($newFaveProductId <=0 ) {
+		if($newFavoriteProductId <=0 ) {
 			throw(new\RangeException("Profile Id is not positive"));
 		}
 
 		//convert and store the product id
-		$this->FaveProductId = $newFaveProductId;
+		$this->favoriteProductId = $newFavoriteProductId;
 	}
 
 	//Start mutator method for faveProductProfileId
 
-	public function getFaveProductProfileId(): ?int {
-		return ($this->faveProductProfileId);
+	public function getFavoriteProductProfileId(): int {
+		return ($this->favoriteProductProfileId);
 	}
 
 	/**
@@ -92,18 +92,18 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 * @throws \TypeError if $newProfileId is not an integer
 	 */
 
-	public function setFaveProductProfileId(?int $newFaveProductProfileId): void {
-		if($newFaveProductProfileId === null) {
-			$this->productProfileId = null;
+	public function setFavoriteProductProfileId( int $newFavoriteProductProfileId): void {
+		if($newFavoriteProductProfileId === null) {
+			$this->favoriteProductProfileId = null;
 			return;
 		}
 
-		if($newFaveProductProfileId <=0 ) {
+		if($newFavoriteProductProfileId <=0 ) {
 			throw(new\RangeException("Profile Id is not positive"));
 		}
 
 		//convert and store the product id
-		$this->faveProductProfileId = $newFaveProductProfileId;
+		$this->favoriteProductProfileId = $newFavoriteProductProfileId;
 	}
 
 	/**
@@ -115,17 +115,17 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 **/
 	public function insert(\PDO $pdo) : void {
 		// enforce the faveProductId is null (i.e., don't insert a favorite that already exists)
-		if($this->faveProductId !== null) {
+		if($this->favoriteProductId !== null) {
 			throw(new \PDOException("not a new favorite"));
 		}
 		// create query template
-		$query = "INSERT INTO favorite(faveProductId, faveProductProfileId) VALUES(:faveProfileId, :faveProductProfileId)";
+		$query = "INSERT INTO favorite(favoriteProductId, favoriteProductProfileId) VALUES(:favoriteProfileId, :favoriteProductProfileId)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$parameters = ["faveProductId" => $this->faveProductId, "faveProductProfileId" => $this->faveProductProfileId];
+		$parameters = ["favoriteProductId" => $this->favoriteProductId, "favoriteProductProfileId" => $this->favoriteProductProfileId];
 		$statement->execute($parameters);
 		// update the null faveProductId with what mySQL just gave us
-		$this->faveProductId = intval($pdo->lastInsertId());
+		$this->favoriteProductId = intval($pdo->lastInsertId());
 	}
 
 	/**
@@ -137,14 +137,14 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 **/
 	public function delete(\PDO $pdo) : void {
 		// enforce the faveProductId is not null (i.e., don't delete a fave that hasn't been inserted)
-		if($this->faveProductId === null) {
+		if($this->favoriteProductId === null) {
 			throw(new \PDOException("unable to delete a fave that does not exist"));
 		}
 		// create query template
-		$query = "DELETE FROM fave WHERE faveProductId = :faveProductId";
+		$query = "DELETE FROM favorite WHERE favoriteProductId = :favoriteProductId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holder in the template
-		$parameters = ["faveProductId" => $this->faveProductId];
+		$parameters = ["favoriteProductId" => $this->favoriteProductId];
 		$statement->execute($parameters);
 	}
 
@@ -157,14 +157,14 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 **/
 	public function update(\PDO $pdo) : void {
 		// enforce the tweetId is not null (i.e., don't update a tweet that hasn't been inserted)
-		if($this->faveProductId === null) {
+		if($this->favoriteProductId === null) {
 			throw(new \PDOException("unable to update a tweet that does not exist"));
 		}
 		// create query template
-		$query = "DELETE FROM fave WHERE faveProductId = :faveProductId";
+		$query = "DELETE FROM fave WHERE favoriteProductId = :faveProductId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$parameters = ["faveProductProfileId" => $this->faveProductProfileId, "faveProductId" => $this->faveProductId];
+		$parameters = ["favoriteProductProfileId" => $this->favoriteProductProfileId, "favoriteProductId" => $this->favoriteProductId];
 		$statement->execute($parameters);
 	}
 
@@ -177,16 +177,16 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getfavesByfaveId(\PDO $pdo, int $faveProductId) : ?Favorite {
+	public static function getfavoritesByfavoriteId(\PDO $pdo, int $favoriteProductId) : Favorite {
 		// sanitize the tweetId before searching
-		if($faveProductId <= 0) {
-			throw(new \PDOException("fave id is not positive"));
+		if($favoriteProductId <= 0) {
+			throw(new \PDOException("favorite id is not positive"));
 		}
 		// create query template
-		$query = "SELECT faveProductId, faveProductProfileId FROM favorite WHERE faveProductId = :faveProductId";
+		$query = "SELECT favoriteProductId, favoriteProductProfileId FROM favorite WHERE favoriteProductId = :favoriteProductId";
 		$statement = $pdo->prepare($query);
 		// bind the tweet id to the place holder in the template
-		$parameters = ["faveProductId" => $faveProductId];
+		$parameters = ["favoriteProductId" => $favoriteProductId];
 		$statement->execute($parameters);
 		// grab the fave from mySQL
 		try {
@@ -194,7 +194,7 @@ public function __construct(?int $newFaveProductId, int $newFaveProductProfileId
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$favorite = new Favorite($row["faveProductId"], $row["faveProductProfileId"]);
+				$favorite = new Favorite($row["favoriteProductId"], $row["favoriteProductProfileId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
