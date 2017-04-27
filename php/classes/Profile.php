@@ -273,20 +273,98 @@ class Profile{
 		$this->profileSalt = $newProfileSalt;
 	}
 
+
 	/**
-	 * inserts this Profile into mySQL
+	* inserts productId into Mysql
+	*@param \PDO $pdo PDO connection object
+	*@throws /PDOException when mySQL related errors occur
+	*@throws \TypeError if $pdo is not a PDO connection object
+	**/
+	public function insert(\PDO $pdo) : void {
+		//enforce the productId is null (i.e., don't insert a productId that already exists
+		if($this->profileHandle !== null) {
+			throw(new \PDOException("not a new Handle"));
+		}
+		//create query template
+		$query = "INSERT INTO profile(profileHandle, profileEmail) VALUE(:profileHandle, :profileEmail)";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holders in the template
+		$parameters = ["ProfileEmail" => $this->profileEmail, "profileHandle" => $this->profileHandle];
+		$statement->execute($parameters);
+		// update the null productId with what mysql just gave us
+		$this->profileHandle = intval($pdo->lastInsertId());
+	}
+	/**
+	 * deletes this product from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL related errors occur
+	 * @throw \PDOException whe mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
-	 *
 	 */
 
-//	public function insert(\PDO $PDO): void {
-//		// enforce the profileId is null (i.e., don't insert a profile that already exists)
-//		if($this->profileId !== null) {
-//			throw(new \PDOException("not a new profile"));
-//		}
-//
+	public function delete(\PDO $pdo) : void {
+		// enforce the productId is not null.
+		if($this->orofileHandle === null) {
+			throw(new \PDOException("Unable to delete product that does not exists"));
+		}
+		// create query
+		$query = "DELETE FROM profile WHERE profileHandle = :profileHandle";
+		$statement = $pdo->prepare($query);
+		// bind variables
+		$parameters = ["productId" => $this->profileHandle];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * Updates this product
+	 * @param PDO $pdo
+	 */
+
+	public function update(\PDO $pdo) : void {
+		// enforce the productId is not null.
+		if($this->profileHandle === null) {
+			throw(new \PDOException("Unable to update product that does not exists"));
+		}
+		// create query
+		$query = "UPDATE profile SET profileEmail= :profileEmal, profileHandle = :profileHandle WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+		// bind variables
+		$parameters = ["productProfileId" => $this->profileEmail, "profileEmail" => $this->profileHandle, "profileHandle" => $this->profileId];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * gets a product by productId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $tweetId tweet id to search for
+	 * @return Tweet|null Tweet found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getProfilebyProfileId(\PDO $pdo, int $productId) : ?Profile {
+		// sanitize the tweetId before searching
+		if($profileId <= 0) {
+			throw(new \PDOException("product id is not positive"));
+		}
+		// create query template
+		$query = "SELECT profileId, profileHandle, profileEmail FROM profile WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+		// bind the tweet id to the place holder in the template
+		$parameters = ["profileId" => :$profileId];
+		$statement->execute($parameters);
+		// grab the tweet from mySQL
+		try {
+			$profile = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$product = new Profile($row["profileId"], $row["profileHandle"], $row["profileEmail"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($profile);
 
 }
